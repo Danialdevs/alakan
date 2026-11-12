@@ -1,0 +1,14 @@
+{
+  "name": "alakan",
+  "version": "1.0.0",
+  "description": "Алақан — сканер ладони в браузере: приложите ладонь и узнайте свой характер",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "setup": "node scripts/fetch-vendor.mjs",
+    "start": "node serve.mjs"
+  },
+  "devDependencies": {
+    "@mediapipe/tasks-vision": "1.2.3"
+  }
+}

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="kk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alakan</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="mode-boot">
+  <canvas id="scene"></canvas>
+
+  <header class="top">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="18" />
+        <path d="M14 28c-2-4-3-8-2-13M18 29c-1-6-1-12 0-19M22 29c1-6 1-12 0-18M26 28c2-4 3-8 2-12" />
+      </svg>
+      <div><b data-t="brand"></b><small data-t="tagline"></small></div>
+    </div>
+    <div class="status" id="status"><i></i><span></span></div>
+    <button class="gear" id="gear" title="Настройки (S)" aria-label="Настройки">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" /><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1" /></svg>
+    </button>
+    <div class="lang" role="group">
+      <button data-lang="kk">ҚАЗ</button>
+      <button data-lang="ru">РУС</button>
+    </div>
+  </header>
+
+  <section class="prompt" id="prompt">
+    <h1 id="promptMain"></h1>
+    <p id="promptSub"></p>
+    <p id="promptAlt" class="alt"></p>
+  </section>
+
+  <section class="scanhud" id="scanhud">
+    <div class="panel left">
+      <h3 id="stepsTitle">BIO-SCAN</h3>
+      <ul id="steps"></ul>
+    </div>
+    <div class="panel right">
+      <h3 id="liveTitle"></h3>
+      <div id="liveBars"></div>
+      <pre id="hexdump"></pre>
+    </div>
+    <div class="percent" id="percent"><em id="scanLabel"></em><div><span id="pct">0</span><small>%</small></div></div>
+    <div class="warn" id="warn"></div>
+  </section>
+
+  <section class="result" id="result">
+    <div class="eyebrow" id="rEyebrow"></div>
+    <h2 id="rTitle"></h2>
+    <p class="desc" id="rDesc"></p>
+    <div class="cols">
+      <div>
+        <h4 id="rTraitsT"></h4>
+        <div class="traits" id="rTraits"></div>
+      </div>
+      <div>
+        <h4 id="rLinesT"></h4>
+        <div class="lines" id="rLines"></div>
+      </div>
+    </div>
+    <div class="advice"><b id="rAdviceT"></b><span id="rAdvice"></span></div>
+  </section>
+
+  <aside class="settings" id="settings" hidden></aside>
+
+  <div class="start" id="start"><button id="startBtn"></button><small>ҚАЗ · РУС</small></div>
+
+  <footer>
+    <span id="again"></span>
+    <span id="disclaimer"></span>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
