@@ -52,7 +52,6 @@ export class Audio {
       }
       this.current = null;
     }
-    if (window.speechSynthesis) speechSynthesis.cancel();
     this.queue = Promise.resolve();
   }
 
@@ -64,7 +63,7 @@ export class Audio {
     this.queue = this.queue.then(async () => {
       const buffer = await loading;
       if (token !== this.token) return;
-      if (!buffer) return this.fallback(text, lang, token);
+      if (!buffer) return console.warn('[voice] no recording for:', text.slice(0, 60));
       this.resume();
       await new Promise((resolve) => {
         const node = this.ctx.createBufferSource();
@@ -81,20 +80,8 @@ export class Audio {
     return this.queue;
   }
 
-  // Without network: the system voice (Russian only — Windows has no Kazakh voice).
-  fallback(text, lang, token) {
-    if (lang !== 'ru' || !window.speechSynthesis || token !== this.token) return;
-    return new Promise((resolve) => {
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = 'ru-RU';
-      u.onend = resolve;
-      u.onerror = resolve;
-      speechSynthesis.speak(u);
-    });
-  }
-
   get speaking() {
-    return !!this.current || (window.speechSynthesis && speechSynthesis.speaking);
+    return !!this.current;
   }
 
   // ---------------- sound effects
