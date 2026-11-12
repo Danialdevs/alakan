@@ -10,7 +10,7 @@ export const TRAITS = [
   { id: 'energy', kk: 'Қуат', ru: 'Энергия' },
 ];
 
-const ARCHETYPES = [
+export const ARCHETYPES = [
   {
     id: 'leader', w: [1, 0, 0, 0, 0.5, 0.6], hue: 42,
     kk: {

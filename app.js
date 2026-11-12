@@ -90,11 +90,12 @@ function renderStatus() {
   let text = '';
   if (source.kind === 'camera') {
     ok = source.ready;
-    text = source.error ? t.noCamera : !source.ready ? t.loading : source.isScanner ? 'VP530 · ONLINE' : 'CAMERA · ONLINE';
+    text = source.error ? t.noCamera : !source.ready ? t.loading : '';
   } else {
     ok = true;
     text = 'DEMO';
   }
+  el.hidden = !text; // the badge shows only while loading or when the camera is missing
   el.classList.toggle('ok', ok);
   el.querySelector('span').textContent = text;
 }

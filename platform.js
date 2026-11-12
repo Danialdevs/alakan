@@ -1,4 +1,6 @@
 // Settings and voice-over for the browser.
+import { TTS_DEFAULTS, voiceFile } from './voice.js';
+
 // Settings: defaults below → saved in this browser (settings panel, key S) → URL (?lang=ru&source=demo).
 
 const DEFAULTS = {
@@ -14,12 +16,8 @@ const DEFAULTS = {
     rotate: 0,
     sensitivity: 0.5,
   },
-  tts: {
-    enabled: true,
-    url: 'https://freedomspeech.kz/v1/audio/speech',
-    apiKey: 'fspeech-front-2026-x7k9m',
-    voices: { kk: 'saltanat', ru: 'saltanat_ru' },
-  },
+  tts: TTS_DEFAULTS,
+
 };
 
 const STORE_KEY = 'alakan.settings';
@@ -80,6 +78,14 @@ export function makeTts(options) {
       const cache = await openCache();
       const hit = cache && (await cache.match(key));
       if (hit) return hit.arrayBuffer();
+      // 1) pre-recorded file in the project (works on any host)
+      try {
+        const res = await fetch(voiceFile(voice, text));
+        if (res.ok && (res.headers.get('content-type') || '').startsWith('audio/')) return await res.arrayBuffer();
+      } catch {
+        /* not recorded — ask the API */
+      }
+      // 2) live freedomspeech.kz (it only answers pages opened from localhost)
       try {
         const res = await fetch(options.url, {
           method: 'POST',

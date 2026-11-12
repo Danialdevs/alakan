@@ -247,3 +247,5 @@ body.mode-result #again { opacity: 1; animation: pulse 2.4s ease-in-out infinite
 }
 .start small { text-align: center; color: var(--muted); letter-spacing: .3em; }
 .gear[hidden] { display: none; }
+
+.status[hidden] { display: none; }
